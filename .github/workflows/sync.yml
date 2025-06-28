@@ -35,3 +35,14 @@ jobs:
           git add auto_sync_bot/submissions
           git commit -m "📥 Auto-sync LeetCode submissions" || echo "No changes to commit"
           git push
+
+      - name: Update submissions log
+        run: |
+          python track_submissions.py
+      - name: Commit log
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add submissions_log.json
+          git commit -m "🔄 Update submissions_log.json" || echo "No changes"
+          git push
