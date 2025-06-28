@@ -6,27 +6,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-count:
+  update-badge:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Run badge updater
+      - name: Install dependencies
+        run: pip install matplotlib
+
+      - name: Generate badge
         run: |
           python auto_sync_bot/submissions/update_readme_badge.py
           mkdir -p badge_output
           mv badge.svg badge_output/
 
-      - name: Commit & push changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "🔁 Update badge count in README" || echo "No changes to commit"
-          git push
+      - name: Push badge to output branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./badge_output
+          publish_branch: output
