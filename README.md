@@ -1,4 +1,5 @@
-# LeetAbhyas 🧠
+<h1 align="center">LeetAbhyas 🧠</h1>
+
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/gaurav15042004/LeetAbhyas/output/badge.svg" alt="Solved Problems Badge" width="300"/>
