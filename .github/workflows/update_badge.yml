@@ -19,7 +19,9 @@ jobs:
 
       - name: Run badge updater
         run: |
-          python update_readme_badge.py
+          python auto_sync_bot/submissions/update_readme_badge.py
+          mkdir -p badge_output
+          mv badge.svg badge_output/
 
       - name: Commit & push changes
         run: |
