@@ -1,0 +1,30 @@
+name: 🛠 Update Solved Count Badge
+
+on:
+  schedule:
+    - cron: "0 1 * * *" # every day at 6:30 AM IST
+  workflow_dispatch:
+
+jobs:
+  update-count:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run badge updater
+        run: |
+          python update_readme_badge.py
+
+      - name: Commit & push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "🔁 Update badge count in README" || echo "No changes to commit"
+          git push
