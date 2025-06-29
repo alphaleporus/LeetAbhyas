@@ -40,9 +40,8 @@ def send_email(subject, body):
 
 if __name__ == "__main__":
     submissions = load_submissions()
-    #due = due_reviews(submissions)
-    # --- TEST MODE: treat everything as due ---
-    due = submissions
+    due = due_reviews(submissions)
+
 if not due:
     print("✅ No reviews due today.")
     exit(0)
