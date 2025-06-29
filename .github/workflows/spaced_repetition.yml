@@ -1,12 +1,4 @@
 name: 📬 Spaced Repetition Reminder
-  env:
-    EMAIL_USER:     ${{ secrets.EMAIL_USER }}
-    EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
-    TO_EMAIL:       ${{ secrets.TO_EMAIL }}
-  run: |
-    # TEST MODE: override due logic so everything is due
-    sed -i 's/due = due_reviews(subs)/due = subs/' spaced_reminder.py
-    python spaced_reminder.py
 
 on:
   schedule:
@@ -30,17 +22,19 @@ jobs:
 
       - name: Build submissions log
         env:
-          LEETCODE_COOKIES: ${{ secrets.LEETCODE_COOKIES }}
-          LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
+          LEETCODE_COOKIES:   ${{ secrets.LEETCODE_COOKIES }}
+          LEETCODE_USERNAME:  ${{ secrets.LEETCODE_USERNAME }}
         run: |
           python track_submissions.py
 
-      - name: Send spaced repetition reminders
+      - name: Send spaced repetition reminders (TEST MODE)
         env:
-          LEETCODE_COOKIES: ${{ secrets.LEETCODE_COOKIES }}
-          LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
-          EMAIL_USER:     ${{ secrets.EMAIL_USER }}
-          EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
-          TO_EMAIL:       ${{ secrets.TO_EMAIL }}
+          LEETCODE_COOKIES:   ${{ secrets.LEETCODE_COOKIES }}
+          LEETCODE_USERNAME:  ${{ secrets.LEETCODE_USERNAME }}
+          EMAIL_USER:         ${{ secrets.EMAIL_USER }}
+          EMAIL_APP_PASS:     ${{ secrets.EMAIL_APP_PASS }}
+          TO_EMAIL:           ${{ secrets.TO_EMAIL }}
         run: |
+          # Override the due logic so every submission is considered "due"
+          sed -i "s/due = due_reviews(subs)/due = subs/" spaced_reminder.py
           python spaced_reminder.py
