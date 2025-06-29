@@ -40,10 +40,12 @@ def send_email(subject, body):
 
 if __name__ == "__main__":
     submissions = load_submissions()
-    due = due_reviews(submissions)
-    if not due:
-        print("✅ No reviews due today.")
-        exit(0)
+    #due = due_reviews(submissions)
+    # --- TEST MODE: treat everything as due ---
+    due = submissions
+if not due:
+    print("✅ No reviews due today.")
+    exit(0)
 
     lines = ["You have the following LeetCode problems due for review:\n"]
     for p in due:
