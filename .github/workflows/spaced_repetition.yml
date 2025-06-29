@@ -2,14 +2,15 @@ name: 📬 Spaced Repetition Reminder
 
 on:
   schedule:
-    - cron: '30 0 * * *'  # Runs every day at 5:30 AM IST
+    - cron: '30 0 * * *'   # Daily at 5:30 AM IST
   workflow_dispatch:
 
 jobs:
   remind:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -17,9 +18,21 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install python-dotenv
+        run: |
+          pip install python-dotenv requests
 
-      - name: Send review reminders
+      - name: Build submissions log
+        run: |
+          python track_submissions.py
+      - name: Commit submissions_log.json (optional)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add submissions_log.json
+          git commit -m "🔄 Update submissions_log.json" || echo "No changes"
+          git push
+
+      - name: Send spaced repetition reminders
         env:
           EMAIL_USER:     ${{ secrets.EMAIL_USER }}
           EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
