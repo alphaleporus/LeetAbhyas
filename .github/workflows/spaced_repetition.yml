@@ -27,4 +27,12 @@ jobs:
         run: |
           python track_submissions.py
 
-
+      - name: Send spaced repetition reminders
+        env:
+          LEETCODE_COOKIES:   ${{ secrets.LEETCODE_COOKIES }}
+          LEETCODE_USERNAME:  ${{ secrets.LEETCODE_USERNAME }}
+          EMAIL_USER:         ${{ secrets.EMAIL_USER }}
+          EMAIL_APP_PASS:     ${{ secrets.EMAIL_APP_PASS }}
+          TO_EMAIL:           ${{ secrets.TO_EMAIL }}
+        run: |
+          python spaced_reminder.py
