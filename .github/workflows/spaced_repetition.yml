@@ -1,13 +1,12 @@
 name: 📬 Spaced Repetition Reminder
-  - name: Send spaced repetition reminders
-    env:
-      EMAIL_USER:     ${{ secrets.EMAIL_USER }}
-      EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
-      TO_EMAIL:       ${{ secrets.TO_EMAIL }}
-    run: |
-      # TEST MODE: override due logic so everything is due
-      sed -i 's/due = due_reviews(subs)/due = subs/' spaced_reminder.py
-      python spaced_reminder.py
+  env:
+    EMAIL_USER:     ${{ secrets.EMAIL_USER }}
+    EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
+    TO_EMAIL:       ${{ secrets.TO_EMAIL }}
+  run: |
+    # TEST MODE: override due logic so everything is due
+    sed -i 's/due = due_reviews(subs)/due = subs/' spaced_reminder.py
+    python spaced_reminder.py
 
 on:
   schedule:
