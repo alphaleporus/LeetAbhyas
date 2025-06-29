@@ -9,7 +9,7 @@ jobs:
   remind:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -18,22 +18,19 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: |
-          pip install python-dotenv requests
+        run: pip install python-dotenv requests
 
       - name: Build submissions log
+        env:
+          LEETCODE_COOKIES: ${{ secrets.LEETCODE_COOKIES }}
+          LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
         run: |
           python track_submissions.py
-      - name: Commit submissions_log.json (optional)
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add submissions_log.json
-          git commit -m "🔄 Update submissions_log.json" || echo "No changes"
-          git push
 
       - name: Send spaced repetition reminders
         env:
+          LEETCODE_COOKIES: ${{ secrets.LEETCODE_COOKIES }}
+          LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
           EMAIL_USER:     ${{ secrets.EMAIL_USER }}
           EMAIL_APP_PASS: ${{ secrets.EMAIL_APP_PASS }}
           TO_EMAIL:       ${{ secrets.TO_EMAIL }}

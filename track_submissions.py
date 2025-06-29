@@ -3,16 +3,16 @@ import os, json, requests
 from dotenv import load_dotenv
 
 load_dotenv()
-SESSION = os.getenv("LEETCODE_SESSION")
-CSRF    = os.getenv("CSRF_TOKEN")
+COOKIES_HEADER = os.getenv("LEETCODE_COOKIES")
 USER    = os.getenv("LEETCODE_USERNAME")  # e.g. "Alphaleporus"
 
 HEADERS = {
-    "Cookie":       f"LEETCODE_SESSION={SESSION}; csrftoken={CSRF}",
-    "X-CSRFToken":  CSRF,
-    "Referer":      "https://leetcode.com",
-    "Content-Type": "application/json",
-    "User-Agent":   "Mozilla/5.0",
+    "cookie":        COOKIES_HEADER,
+    "content-type":  "application/json",
+    "x-requested-with": "XMLHttpRequest",
+    "origin":        "https://leetcode.com",
+    "referer":       "https://leetcode.com",
+    "user-agent":    "Mozilla/5.0",
 }
 GQL = "https://leetcode.com/graphql"
 
