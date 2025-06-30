@@ -1,4 +1,4 @@
-name: LeetCode Daily Sync
+name: 🔁 LeetCode Daily Sync
 
 on:
   schedule:
@@ -18,7 +18,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install leetcode-export
-        run: pip install leetcode-export
+        run: pip install leetcode-export python-dotenv requests
 
       - name: Export LeetCode submissions
         run: |
@@ -39,6 +39,7 @@ jobs:
       - name: Update submissions log
         run: |
           python track_submissions.py
+
       - name: Commit log
         run: |
           git config user.name  "github-actions[bot]"
