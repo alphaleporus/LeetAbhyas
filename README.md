@@ -1,83 +1,99 @@
 <div align="center">
 
-  <h1>LeetAbhyas 🧠</h1>
-  <img src="https://raw.githubusercontent.com/gaurav15042004/LeetAbhyas/output/badge.svg" alt="Submissions Badge">
+  <h1 style="font-size: 3em; color: #4CAF50;">LeetAbhyas 🧠</h1>
+  <img src="https://raw.githubusercontent.com/gaurav15042004/LeetAbhyas/output/badge.svg" alt="Submissions Badge" style="margin: 20px 0;">
 
-  <p>LeetAbhyas is a fully automated and aesthetically organised repository that syncs all my accepted LeetCode submissions. Each problem is neatly version-controlled and browsable — automatically updated every day using GitHub Actions and a custom Python bot.</p>
+  <p style="font-size: 1.1em; max-width: 600px;">
+    <strong>LeetAbhyas</strong> is a fully automated and beautifully structured repository that tracks all my <em>accepted</em> LeetCode submissions and delivers smart, spaced repetition reminders — directly to your inbox.
+  </p>
 
-  <blockquote><strong>🎯 Encouraging consistency, mastery of DSA, and long-term recall.</strong></blockquote>
+  <blockquote><strong>🎯 Designed for consistency, DSA mastery, and long-term retention.</strong></blockquote>
 
 </div>
 
 ---
 
-## 🔧 Tech Stack
-
-- 🐍 Python
-- 🔁 GitHub Actions
-- ⚙️ leetcode-export CLI
-- ☁️ Git & GitHub
-- 📚 Java for DSA
-
----
-
-## 📈 Badge System
-
-The dynamic badge above reflects the total number of accepted submissions. It updates automatically after each daily sync using a custom badge renderer.
-
----
-
-## ⚙️ Automations at Work
-
-- 🕰 **Daily Sync**: GitHub Action runs at 6 AM IST to fetch new accepted problems.
-- 📁 **Structured Storage**: Problems saved by ID and slug.
-- ✅ **Accepted-Only**: Filters out rejected or duplicate submissions.
-- 🧠 **Spaced Repetition Reminder**: Reinforces learning through timed revision emails.
-
----
-
-## 🧠 Spaced Repetition System
-
-Maximize retention with science-backed revision intervals:
+## 🌐 Tech Stack
 
 <div align="center">
 
-| Review Day | Reminder Type      |
-|------------|--------------------|
-| Day 7      | First recall       |
-| Day 15     | Reinforcement      |
-| Day 30     | Medium-term memory |
-| Day 60     | Long-term memory   |
-| Day 90     | Final reinforcement|
+| 🧩 Stack             | 🔍 Purpose                                    |
+|----------------------|-----------------------------------------------|
+| 🐍 Python            | Core scripting (fetch, sync, reminder)        |
+| 🔁 GitHub Actions    | Automation for syncing and email dispatch     |
+| ⚙️ leetcode-export    | CLI for fetching accepted submissions         |
+| ✉️ Gmail SMTP        | Sends rich HTML reminder emails               |
+| 📚 Java              | Primary DSA language                          |
+| ☁️ Git + GitHub      | Version control and remote hosting            |
 
 </div>
 
-- 📬 Emails triggered automatically using GitHub Actions.
-- 🔐 Credentials like `EMAIL_USER`, `TO_EMAIL` managed with GitHub Secrets.
-- 🧾 Powered by a Python script (`spaced_reminder.py`) that checks your submissions log.
+---
+
+## 📊 Dynamic Badge
+
+The badge above shows the live count of accepted LeetCode submissions, auto-updated after each sync. Rendered via a custom GitHub Actions workflow.
 
 ---
 
-## 🛠 Getting Started (Fork & Use)
+## 🤖 Automation Flow
 
-1. **Fork this Repository**
-2. Navigate to: `Settings → Secrets and Variables → Actions`
+![Automation Flow](Mermaid%20AI%20Diagram%20Jul%208%202025.svg)
+
+
+---
+
+## 🧠 Spaced Repetition Logic
+
+<div align="center">
+
+| 📅 Review Day | 🧪 Type               |
+|---------------|-----------------------|
+| Day 7         | First recall          |
+| Day 15        | Reinforcement         |
+| Day 30        | Medium-term memory    |
+| Day 60        | Long-term memory      |
+| Day 90        | Final reinforcement   |
+
+</div>
+
+- ✅ Python script: `spaced_reminder.py`
+- 🧾 Tracks from `submissions_log.json`
+- 🎨 Sends polished HTML emails with direct problem links
+- 🔐 Secured using Gmail App Password
+
+---
+
+## 🚀 Get Started (Fork & Run)
+
+> Clone the power. Build your revision muscle.
+
+1. **Fork the Repository**
+2. Navigate to `Settings → Secrets → Actions`
 3. Add the following secrets:
-   - `LEETCODE_SESSION`: your LeetCode session cookie
-   - `LEETCODE_USERNAME`: your LeetCode username
-   - `EMAIL_USER`: your sender email (Gmail recommended)
-   - `EMAIL_APP_PASS`: your app password (not main Gmail password)
-   - `TO_EMAIL`: where to receive reminders
+   - `LEETCODE_COOKIES`: Your full LeetCode cookie string
+   - `LEETCODE_USERNAME`: Your LeetCode handle
+   - `EMAIL_USER`: Sender Gmail address
+   - `EMAIL_APP_PASS`: Gmail app-specific password
+   - `TO_EMAIL`: Destination email address
 4. Enable GitHub Actions
-5. Sit back and watch the automation 🎬
+5. 💥 Done! Watch the automation work its magic
 
 ---
 
-## 🙌 About Me
+## ✨ Showcase Snapshot
+
+![sample-email](https://raw.githubusercontent.com/gaurav15042004/LeetAbhyas/assets/sample-email.png)
+
+*Above: Sample spaced repetition HTML email (auto-generated)*
+
+---
+
+## 👨‍💻 About the Creator
 
 <div align="center">
 
-**Made with 💻 + ❤️ by Gaurav Sharma**
+**Crafted with ❤️ and caffeine by Gaurav Sharma**
 
 📧 gaurav15042004@gmail.com  
 🎓 B.Tech Computer Engineering @ BVCOE Pune  
@@ -88,5 +104,5 @@ Maximize retention with science-backed revision intervals:
 ---
 
 <div align="center">
-  “Consistency compounds.” – Naval Ravikant
+  <em>“Consistency compounds.” – Naval Ravikant</em>
 </div>
