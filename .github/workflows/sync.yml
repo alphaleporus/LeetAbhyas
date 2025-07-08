@@ -1,4 +1,4 @@
-name: LeetCode Daily Sync
+name: 🔁 LeetCode Daily Sync
 
 on:
   schedule:
@@ -17,8 +17,9 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install leetcode-export
-        run: pip install leetcode-export
+      - name: Install dependencies
+        run: |
+          pip install leetcode-export python-dotenv requests
 
       - name: Export LeetCode submissions
         run: |
@@ -28,7 +29,7 @@ jobs:
             --submission-filename "{slug}.{ext}" \
             --only-accepted
 
-      - name: Commit and push changes
+      - name: Commit and push submissions
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -37,9 +38,13 @@ jobs:
           git push
 
       - name: Update submissions log
+        env:
+          LEETCODE_COOKIES:   ${{ secrets.LEETCODE_COOKIES }}
+          LEETCODE_USERNAME:  ${{ secrets.LEETCODE_USERNAME }}
         run: |
           python track_submissions.py
-      - name: Commit log
+
+      - name: Commit submissions_log.json
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
