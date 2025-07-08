@@ -27,6 +27,12 @@ jobs:
         run: |
           python track_submissions.py
 
+      - name:  Debug Show last 5 fetched submissions
+        run: |
+          echo "Last 5 submissions:"
+          tail -n 20 submissions_log.json | head -n 20
+
+
       - name: Send spaced repetition reminders
         env:
           LEETCODE_COOKIES:   ${{ secrets.LEETCODE_COOKIES }}
