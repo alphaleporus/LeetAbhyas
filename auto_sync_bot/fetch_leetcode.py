@@ -1,80 +1,68 @@
-import os
-import json
-import requests
+# fetch_leetcode.py (updated with timestamp clamp)
+import os, json, requests, time
 from dotenv import load_dotenv
 
-# ─── Load .env ────────────────────────────────────────────────────────────────
 load_dotenv()
-LEETCODE_SESSION = os.getenv("LEETCODE_SESSION")
-CSRF_TOKEN       = os.getenv("CSRF_TOKEN")
-USERNAME         = "Alphaleporus"   # ← your handle
+COOKIES_HEADER = os.getenv("LEETCODE_COOKIES")
+USER    = os.getenv("LEETCODE_USERNAME")  # e.g. "Alphaleporus"
 
-# ─── Endpoints ───────────────────────────────────────────────────────────────
-GRAPHQL_URL = "https://leetcode.com/graphql"
-DETAIL_API  = "https://leetcode.com/api/submissions/detail/{id}/"
-
-# ─── Headers (with both cookies) ─────────────────────────────────────────────
 HEADERS = {
-    "Cookie":       f"LEETCODE_SESSION={LEETCODE_SESSION}; csrftoken={CSRF_TOKEN}",
-    "X-CSRFToken":  CSRF_TOKEN,
-    "Referer":      "https://leetcode.com",
-    "User-Agent":   "Mozilla/5.0",
-    "Accept":       "application/json",
+    "cookie":        COOKIES_HEADER,
+    "content-type":  "application/json",
+    "x-requested-with": "XMLHttpRequest",
+    "origin":        "https://leetcode.com",
+    "referer":       "https://leetcode.com",
+    "user-agent":    "Mozilla/5.0",
 }
+GQL = "https://leetcode.com/graphql"
 
-# ─── Query recent AC submissions (to get IDs) ────────────────────────────────
-RECENT_SUBS_QUERY = """
+RECENT_QUERY = """
 query recentAcSubmissions($username: String!) {
   recentAcSubmissionList(username: $username) {
     id
     title
     titleSlug
+    timestamp
     lang
     statusDisplay
   }
 }
 """
 
-def fetch_recent_metadata():
-    payload = {"query": RECENT_SUBS_QUERY, "variables": {"username": USERNAME}}
-    r = requests.post(GRAPHQL_URL, json=payload, headers=HEADERS)
-    r.raise_for_status()
-    return r.json()["data"]["recentAcSubmissionList"]
+def fetch_log():
+    resp = requests.post(
+        GQL,
+        json={"query": RECENT_QUERY, "variables": {"username": USER}},
+        headers=HEADERS
+    )
+    resp.raise_for_status()
+    lod = resp.json()["data"]["recentAcSubmissionList"]
+    now_ts = int(time.time())  # Clamp to current time
+    return [
+        {
+            "id": sub["id"],
+            "slug": sub["titleSlug"],
+            "title": sub["title"],
+            "ts": min(int(sub["timestamp"]), now_ts)
+        }
+        for sub in lod
+    ]
 
-def fetch_code_via_api(submission_id: int) -> str | None:
-    url = DETAIL_API.format(id=submission_id)
-    r = requests.get(url, headers=HEADERS)
-    if r.status_code != 200:
-        print(f"⚠️ API detail failed for {submission_id}: {r.status_code}")
-        return None
-    data = r.json().get("submissionDetail") or r.json()
-    return data.get("code")
+def load_old(filepath="submissions_log.json"):
+    if not os.path.exists(filepath):
+        return []
+    return json.load(open(filepath))
 
-def fetch_and_save():
-    subs = fetch_recent_metadata()
-    print(f"📥 Fetched {len(subs)} submissions")
-
-    save_dir = os.path.join("auto_sync_bot", "submissions")
-    os.makedirs(save_dir, exist_ok=True)
-
-    for sub in subs:
-        sid    = sub["id"]
-        title  = sub["title"]
-        safe   = title.replace(" ", "_")
-        lang   = sub["lang"]
-        ext    = "java" if "Java" in lang else "py"
-        path   = os.path.join(save_dir, f"{safe}.{ext}")
-
-        if os.path.exists(path):
-            continue
-
-        code = fetch_code_via_api(sid)
-        if not code:
-            continue
-
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(f"// {title} [{lang}]\n\n{code}")
-        print(f"✅ Saved: {path}")
+def merge(old, new):
+    now_ts = int(time.time())
+    d = {p["id"]: p for p in old}
+    for p in new:
+        p["ts"] = min(p["ts"], now_ts)
+        d[p["id"]] = p
+    return sorted(d.values(), key=lambda x: x["ts"])
 
 if __name__ == "__main__":
-    fetch_and_save()
+    log = merge(load_old(), fetch_log())
+    with open("submissions_log.json", "w") as f:
+        json.dump(log, f, indent=2)
+    print(f"🔍 submissions_log.json updated with {len(log)} entries")
