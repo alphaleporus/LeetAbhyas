@@ -1,6 +1,6 @@
-# spaced_reminder.py
+# spaced_reminder.py (updated to fix deprecation warnings and a bug in logic)
 import os, json, smtplib
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from dotenv import load_dotenv
 
@@ -17,10 +17,10 @@ def load_submissions():
     return json.load(open(LOG_PATH))
 
 def due_reviews(subs):
-    today = datetime.utcnow().date()
+    today = datetime.now(timezone.utc).date()
     due = []
     for sub in subs:
-        dt = datetime.utcfromtimestamp(sub["ts"]).date()
+        dt = datetime.fromtimestamp(sub["ts"], tz=timezone.utc).date()
         for d in REVIEW_INTERVALS:
             if today == dt + timedelta(days=d):
                 due.append(sub)
@@ -42,15 +42,16 @@ if __name__ == "__main__":
     submissions = load_submissions()
     due = due_reviews(submissions)
 
-if not due:
-    print("✅ No reviews due today.")
-    exit(0)
+    if not due:
+        print("✅ No reviews due today.")
+        exit(0)
 
     lines = ["You have the following LeetCode problems due for review:\n"]
     for p in due:
+        reviewed_on = datetime.fromtimestamp(p['ts'], tz=timezone.utc).date()
         lines.append(f"- [{p['id']} - {p['slug']}]"
                      f"(https://leetcode.com/problems/{p['slug']}/) "
-                     f"solved on {datetime.utcfromtimestamp(p['ts']).date()}")
+                     f"solved on {reviewed_on}")
     body = "\n".join(lines)
 
     send_email(
@@ -58,3 +59,4 @@ if not due:
         body=body
     )
     print(f"📬 Sent review reminder for {len(due)} problems.")
+
