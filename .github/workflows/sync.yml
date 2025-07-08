@@ -2,7 +2,7 @@ name: 🔁 LeetCode Daily Sync
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Runs every day at 3:00 AM UTC (8:30 AM IST)
+    - cron: '30 0 * * *'   # Daily at 5:30 AM IST
   workflow_dispatch:      # Allows manual trigger
 
 jobs:
