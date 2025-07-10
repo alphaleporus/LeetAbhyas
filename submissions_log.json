@@ -40,5 +40,11 @@
     "slug": "reverse-integer",
     "title": "Reverse Integer",
     "ts": 1751888858
+  },
+  {
+    "id": "1693034074",
+    "slug": "frequency-of-the-most-frequent-element",
+    "title": "Frequency of the Most Frequent Element",
+    "ts": 1752143260
   }
 ]
