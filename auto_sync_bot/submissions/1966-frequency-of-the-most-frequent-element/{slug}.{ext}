@@ -1,0 +1,23 @@
+class Solution {
+    public int maxFrequency(int[] nums, int k) {
+        long total=0;
+        int left = 0;
+        int maxFreq = 0;
+
+        Arrays.sort(nums);
+
+        for(int right =0; right < nums.length ;right++){
+            total+= nums[right];
+            long cost = (long) nums[right] * (right - left + 1) - (total);
+
+            while(cost>k){
+                total-=nums[left];
+                left++;
+                cost = (long) nums[right] * (right - left + 1) - (total);
+            }
+
+            maxFreq = Math.max(maxFreq, right - left +1);
+        }
+        return maxFreq;
+    }
+}
