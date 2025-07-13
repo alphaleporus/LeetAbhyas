@@ -46,5 +46,11 @@
     "slug": "frequency-of-the-most-frequent-element",
     "title": "Frequency of the Most Frequent Element",
     "ts": 1752143260
+  },
+  {
+    "id": "1695799527",
+    "slug": "check-if-array-is-sorted-and-rotated",
+    "title": "Check if Array Is Sorted and Rotated",
+    "ts": 1752374129
   }
 ]
