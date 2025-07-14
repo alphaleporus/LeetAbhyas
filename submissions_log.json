@@ -52,5 +52,17 @@
     "slug": "check-if-array-is-sorted-and-rotated",
     "title": "Check if Array Is Sorted and Rotated",
     "ts": 1752374129
+  },
+  {
+    "id": "1695860645",
+    "slug": "remove-duplicates-from-sorted-array",
+    "title": "Remove Duplicates from Sorted Array",
+    "ts": 1752376252
+  },
+  {
+    "id": "1695962060",
+    "slug": "rotate-array",
+    "title": "Rotate Array",
+    "ts": 1752381394
   }
 ]
