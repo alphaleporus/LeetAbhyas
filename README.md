@@ -19,9 +19,9 @@
 
 | 🧩 Tool              | 🔍 Role                                     |
 |----------------------|----------------------------------------------|
-| 🐍 Python            | Scripts for syncing & spaced reminders       |
+| 🐍 Python3           |Scripts for syncing & spaced reminders       |
 | 🔁 GitHub Actions    | Automates everything daily                   |
-| ⚙️ leetcode-export    | Fetches accepted submissions                 |
+| ⚙️ leetcode-export   | Fetches accepted submissions                 |
 | ✉️ Gmail SMTP        | Sends HTML-rich spaced reminder emails       |
 | 📚 Java              | Main language used for solving problems      |
 | ☁️ Git + GitHub      | Organizes & hosts your practice efforts      |
@@ -52,7 +52,7 @@ Enhance memory retention using science-backed review intervals:
 |--------|------------------------|
 | 7      | Initial recall         |
 | 15     | First reinforcement    |
-| 30     | Medium-term retention |
+| 30     | Medium-term retention  |
 | 60     | Long-term recall       |
 | 90     | Final reinforcement    |
 
