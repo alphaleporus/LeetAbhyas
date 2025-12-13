@@ -19,7 +19,7 @@
 
 | 🧩 Tool              | 🔍 Role                                     |
 |----------------------|----------------------------------------------|
-| 🐍 Python3           |Scripts for syncing & spaced reminders       |
+| 🐍 Python            |Scripts for syncing & spaced reminders       |
 | 🔁 GitHub Actions    | Automates everything daily                   |
 | ⚙️ leetcode-export   | Fetches accepted submissions                 |
 | ✉️ Gmail SMTP        | Sends HTML-rich spaced reminder emails       |
