@@ -1,0 +1,19 @@
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int n = nums.length;
+        int pos = 0;
+        int neg = 1;
+        int[] reNums = new int[n];
+        for(int num: nums){
+            if(num>0){
+                reNums[pos]=num;
+                pos+=2;
+            }
+            else {
+                reNums[neg]=num;
+                neg+=2;
+            }
+        }
+        return reNums;
+    }
+}

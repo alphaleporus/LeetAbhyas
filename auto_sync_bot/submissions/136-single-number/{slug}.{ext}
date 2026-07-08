@@ -1,0 +1,9 @@
+class Solution {
+    public static int singleNumber(int[] nums) {
+        int current = 0;
+        for(int num: nums){
+            current = current ^ num;
+        }
+        return current;
+    }
+}
