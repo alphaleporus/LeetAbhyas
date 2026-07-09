@@ -190,5 +190,23 @@
     "slug": "longest-substring-without-repeating-characters",
     "title": "Longest Substring Without Repeating Characters",
     "ts": 1773506744
+  },
+  {
+    "id": "2060720020",
+    "slug": "contains-duplicate",
+    "title": "Contains Duplicate",
+    "ts": 1783526337
+  },
+  {
+    "id": "2060773644",
+    "slug": "valid-anagram",
+    "title": "Valid Anagram",
+    "ts": 1783528874
+  },
+  {
+    "id": "2060815490",
+    "slug": "two-sum",
+    "title": "Two Sum",
+    "ts": 1783530707
   }
 ]
