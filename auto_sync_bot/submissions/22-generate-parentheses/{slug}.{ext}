@@ -1,0 +1,23 @@
+class Solution {
+    private List<String> result = new ArrayList<>();
+    public List<String> generateParenthesis(int n) {
+        String current = "";
+        int OL = n;
+        int CL = n;
+        next(current, OL, CL);
+        return result;
+    }
+
+    public void next(String current, int OL, int CL){
+        if(OL==0 && CL==0){
+            result.add(current);
+            return;
+        }
+        if(OL!=0){
+            next(current + '(', OL-1, CL);
+        }
+        if(OL<CL){
+            next(current + ')', OL, CL-1);
+        }
+    }
+}
