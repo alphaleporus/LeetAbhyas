@@ -274,5 +274,23 @@
     "slug": "generate-parentheses",
     "title": "Generate Parentheses",
     "ts": 1783818429
+  },
+  {
+    "id": "2064998703",
+    "slug": "min-stack",
+    "title": "Min Stack",
+    "ts": 1783860872
+  },
+  {
+    "id": "2065212066",
+    "slug": "evaluate-reverse-polish-notation",
+    "title": "Evaluate Reverse Polish Notation",
+    "ts": 1783874037
+  },
+  {
+    "id": "2065448284",
+    "slug": "daily-temperatures",
+    "title": "Daily Temperatures",
+    "ts": 1783890528
   }
 ]
