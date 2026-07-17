@@ -298,5 +298,17 @@
     "slug": "car-fleet",
     "title": "Car Fleet",
     "ts": 1784141686
+  },
+  {
+    "id": "2070105866",
+    "slug": "largest-rectangle-in-histogram",
+    "title": "Largest Rectangle in Histogram",
+    "ts": 1784218118
+  },
+  {
+    "id": "2070410738",
+    "slug": "best-time-to-buy-and-sell-stock",
+    "title": "Best Time to Buy and Sell Stock",
+    "ts": 1784236148
   }
 ]
