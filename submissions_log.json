@@ -310,5 +310,23 @@
     "slug": "best-time-to-buy-and-sell-stock",
     "title": "Best Time to Buy and Sell Stock",
     "ts": 1784236148
+  },
+  {
+    "id": "2070824552",
+    "slug": "longest-substring-without-repeating-characters",
+    "title": "Longest Substring Without Repeating Characters",
+    "ts": 1784274234
+  },
+  {
+    "id": "2071228446",
+    "slug": "longest-repeating-character-replacement",
+    "title": "Longest Repeating Character Replacement",
+    "ts": 1784299642
+  },
+  {
+    "id": "2071360957",
+    "slug": "permutation-in-string",
+    "title": "Permutation in String",
+    "ts": 1784306974
   }
 ]
