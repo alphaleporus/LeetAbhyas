@@ -328,5 +328,23 @@
     "slug": "permutation-in-string",
     "title": "Permutation in String",
     "ts": 1784306974
+  },
+  {
+    "id": "2072181934",
+    "slug": "minimum-window-substring",
+    "title": "Minimum Window Substring",
+    "ts": 1784376613
+  },
+  {
+    "id": "2072336192",
+    "slug": "sliding-window-maximum",
+    "title": "Sliding Window Maximum",
+    "ts": 1784385611
+  },
+  {
+    "id": "2072541063",
+    "slug": "binary-search",
+    "title": "Binary Search",
+    "ts": 1784391502
   }
 ]
