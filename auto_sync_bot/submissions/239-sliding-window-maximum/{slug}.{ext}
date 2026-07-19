@@ -1,0 +1,28 @@
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        Deque<Integer> queue = new ArrayDeque<>();
+        int left = 0;
+        int right = 0;
+        int[]solution = new int[nums.length-k+1];
+        if(nums.length == 0){
+            return solution;
+        }
+        while(right<nums.length){
+            if(!queue.isEmpty() && queue.peek() < left){
+                queue.pollFirst();
+            }
+            while(!queue.isEmpty() && nums[queue.peekLast()]<nums[right]){
+                queue.pollLast();
+            }
+            queue.offerLast(right);
+
+            if(right - left + 1 == k){
+                solution[left] = nums[queue.peek()];
+                left++;
+            }
+            
+            right++;
+        }
+        return solution;
+    }
+}

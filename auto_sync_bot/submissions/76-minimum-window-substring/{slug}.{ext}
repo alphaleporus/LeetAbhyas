@@ -1,0 +1,41 @@
+class Solution {
+    private Boolean isValid(int[] tFreqMap, int[] sFreqMap) {
+        for (int i = 0; i < 128; i++) {
+            if (sFreqMap[i] < tFreqMap[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String minWindow(String s, String t) {
+        int[] tFreqMap = new int[128];
+        int[] sFreqMap = new int[128];
+        for (int i = 0; i < t.length(); i++) {
+            tFreqMap[t.charAt(i)]++;
+        }
+        String solution = "";
+        int minSolLength = Integer.MAX_VALUE;
+        int left = 0;
+        int right = 0;
+
+        while (right < s.length()) {
+            sFreqMap[s.charAt(right)]++;
+
+            while (isValid(tFreqMap, sFreqMap)) {
+                if (s.substring(left, right + 1).length() < minSolLength) {
+                    solution = s.substring(left, right + 1);
+                    minSolLength = solution.length();
+                }
+                sFreqMap[s.charAt(left)]--;
+                left++;
+            }
+
+            if (right < s.length() - 1) {
+                right++;
+            } else
+                break;
+        }
+        return solution;
+    }
+}
