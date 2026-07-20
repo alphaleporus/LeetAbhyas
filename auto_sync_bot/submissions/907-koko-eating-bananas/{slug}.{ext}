@@ -1,0 +1,31 @@
+class Solution {
+    private int isValid(int[] piles, int start, int end, int h,int minSol){
+        if(start>end){
+            return minSol;
+        }
+        int mid = (start+end)/2;
+        long totalHours = 0;
+        for(int pile : piles){
+            long hoursTaken = ((long)pile + mid -1)/mid;
+            totalHours+=hoursTaken;
+        }
+        if(totalHours<=h){
+            minSol = Math.min(minSol, mid);
+            return Math.min(isValid(piles , start, mid-1, h, minSol), minSol);
+        }else{
+            return Math.min(isValid(piles, mid+1, end, h, minSol), minSol);
+        }
+    }
+
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int max = Integer.MIN_VALUE;
+        for(int pile : piles){
+            max = Math.max(max, pile);
+        }
+        int start = 1;
+        int end = max;
+        int minSol = Integer.MAX_VALUE;
+        return isValid(piles, start, end,h,minSol);
+    }
+}
